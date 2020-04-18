@@ -4,7 +4,9 @@
 
 ---
 
-Application Приложение
+### Application
+
+### Приложение
 
 ---
 
@@ -12,7 +14,9 @@ Application Приложение
 
 ---
 
-Instruction Инструкция
+### Instruction
+
+### Инструкция
 
 ---
 
