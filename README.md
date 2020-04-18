@@ -12,4 +12,5 @@ This project was created for convenient translation of lyrics, poems
 Инструкция пользования
 ![Image description](instruction.png)
 
+For project improvement suggestions - polivanov132@gmail.com
 Для предложений улучшения проекта - polivanov132@gmail.com
