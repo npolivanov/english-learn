@@ -18,8 +18,6 @@ Instruction Инструкция
 
 ![Image description](instruction.png "Instruction Инструкция")
 
-> For project improvement suggestions - <polivanov132@gmail.com>
+> For comments and suggestions - <polivanov132@gmail.com>
 >
-> ---
->
-> Для предложений улучшения проекта - <polivanov132@gmail.com>
+> Для замечаний и предложений - <polivanov132@gmail.com>
