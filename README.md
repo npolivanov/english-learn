@@ -9,4 +9,7 @@ This project was created for convenient translation of lyrics, poems
 ################################################################
 
 ![Image description](img-title.png)
+Инструкция пользования
 ![Image description](instruction.png)
+
+Для предложений улучшения проекта - polivanov132@gmail.com
