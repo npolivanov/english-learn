@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  TextField,
-  Input,
-  FormHelperText,
-  FormControl,
-} from "@material-ui/core";
+import ButtonControl from "./components/ButtonControl";
+import LineGroup from "./components/LineGroup";
+import Title from "./components/Title";
+import ControlText from "./components/ControlText";
+import { voice, selectLine, selectAll } from "./apiHandlerText";
 import "./App.css";
 
 interface KeyboardEvent {
@@ -12,13 +11,29 @@ interface KeyboardEvent {
   keyCode: number;
 }
 
+interface TLines {
+  text: string;
+  textTranslate: string;
+}
+
+interface TSelectors {
+  className: string;
+  id: string;
+}
+
 function App() {
-  const [lines, setLine] = useState([
+  const [lines, setLine] = useState<TLines[]>([
     {
-      text: "",
+      text: "Text transform",
       textTranslate: "",
     },
   ]);
+  const [lang, setLang] = useState<string>("en-US");
+  const [display, setDisplay] = useState<boolean>(true);
+  const [selectors, setSelectors] = useState<TSelectors>({
+    className: "",
+    id: "",
+  });
 
   useEffect(() => {
     (window as any).onkeydown = function (e: KeyboardEvent) {
@@ -49,48 +64,50 @@ function App() {
     setLine(array);
   };
 
+  const deleteLine = (iterator: number) => {
+    // check that there is always at least one row
+    if (lines.length === 1) {
+      return;
+    }
+    const array = [...lines];
+    array.splice(iterator, 1);
+    setLine(array);
+  };
+
+  const focus = (className: string, id: string) => {
+    setSelectors({ className: className, id: id });
+  };
+
+  const blur = (className: string) => {
+    // setSelectedInput("");
+  };
+
   return (
     <div className="App">
       <div className="content">
-        <FormControl>
-          <Input
-            id="standard-adornment-weight"
-            aria-describedby="standard-weight-helper-text"
-            autoComplete="off"
-            inputProps={{
-              "aria-label": "weight",
-              style: { textAlign: "center", fontWeight: "bold" },
-            }}
-          />
-          <FormHelperText
-            id="standard-weight-helper-text"
-            style={{ textAlign: "center" }}
-          >
-            TITLE
-          </FormHelperText>
-        </FormControl>
+        <ButtonControl
+          display={display}
+          setDisplay={() => setDisplay(!display)}
+        />
+        <Title focus={focus} blur={blur} />
         {lines.map((item, i) => (
-          <div className="line" key={i}>
-            <div className={`item-${i}`}>
-              <TextField
-                style={{ minWidth: "450px" }}
-                autoComplete="off"
-                label="Text for translate"
-                value={lines[i].text}
-                onChange={(event: any) => changeText(event, i)}
-              />
-            </div>
-            <TextField
-              label="translate"
-              variant="filled"
-              style={{ minWidth: "450px", fontStyle: "italic" }}
-              autoComplete="off"
-              size="small"
-              value={lines[i].textTranslate}
-              onChange={(event) => changeTextTransle(event, i)}
-            />
-          </div>
+          <LineGroup
+            key={i}
+            iterator={i}
+            item={item}
+            focus={focus}
+            blur={blur}
+            display={display}
+            changeText={changeText}
+            changeTextTransle={changeTextTransle}
+            deleteLine={deleteLine}
+          />
         ))}
+        <ControlText
+          selectLine={() => selectLine(selectors.id)}
+          selectAll={() => selectAll(selectors.className)}
+          voice={() => voice(lang)}
+        />
       </div>
     </div>
   );
